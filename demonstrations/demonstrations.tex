@@ -1,0 +1,304 @@
+
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{stmaryrd}
+
+\newtheorem{prop}{Property}
+
+\begin{document}
+
+\title{Introduction to \LaTeX{}}
+\author{Alexandre Poupeau}
+
+\maketitle
+
+
+\section*{Exercice 1}
+
+\paragraph{1)}
+
+\cite{author1}
+
+\section*{Exercice 2}
+
+\paragraph{1.1) Prove that all natural number can be expressed in factorial representation.}
+
+First, we need the show this property :
+
+\begin{prop}
+  \label{prop1}
+  $P_n : \displaystyle\sum_{k=0}^n (k*k!) +1 = (n+1)!$
+\end{prop}
+
+We can prove this quite easily using induction.
+
+\begin{proof}
+
+  Case $n=0$ : $0*0! + 1 = (0+1)! = 1$\\
+
+  Let us suppose that $P_n$ is true. We have to prove that $P_{n+1}$ is true.
+
+  \begin{equation*}
+    \begin{split}
+      \displaystyle\sum_{k=0}^{n+1} (k*k!) +1 & = (n+1)*(n+1)! + \displaystyle\sum_{k=0}^n (k*k!) +1 \\
+       & = (n+1)*(n+1)! + (n+1)! \\
+       & = (n+2)!
+    \end{split}
+  \end{equation*}
+
+  Thus the property is true $\forall n \geq  0$.
+\end{proof}
+
+Now we are going to prove the following property which is the one we want to prove here.
+
+\begin{prop}
+  $P_n : $ The natural number $n$ can be written using factorial representation. This means that $\exists k \in \mathbb{N}$ and $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, i\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*i!$. The factorial representation of $n$ is represented by $a_k...a_1a_0$ where $k$ is the smallest natural number that satisfies the previous result.
+\end{prop}
+
+\begin{proof}
+
+  Case $n=0$ : $0 = a_0*0! = \displaystyle\sum_{i=0}^k a_i*i!$ with $k=0$ and $a_0 = 0$.\\
+
+  Let us suppose that $P_n$ is true. We have to prove that $P_{n+1}$ is true. \\
+
+  As this is our induction hypothesis, we know that $\exists k \in \mathbb{N}$ and $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, i\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*i!$. For convenience, let us take the smallest $k$ such that $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, i\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*i!$. This way we do not work with useless zeros.\\
+
+  Let $i^* = min(i \in \llbracket 0, k+1\rrbracket \mid a_i \ne i)$.\\
+
+  Here is a property we want to prove :
+
+  \begin{itemize}
+    \item If $i^* \leq k$, then $n+1 = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*i!$ where $k^\prime = k$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    a_i $, $\forall i > i^*\\
+                    a_i +1 $, if $i=i^*
+                  \end{array}
+                \right.$
+    \item If $i^* = k+1$, then $n+1 = 1*(k+1)! = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*i!$ where $k^\prime = k+1$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    1 $, if $i=i^*
+                  \end{array}
+                \right.$
+  \end{itemize}
+
+  Proving this previous property implies that $n+1$ can be written in factorial representation. \\
+
+  Let us consider the first case where $i^* \leq k$. Then $\forall i \in \llbracket 0, i^*-1\rrbracket$, $a_i = i$ and $a_{i^*} \in \llbracket 0, i^*-1\rrbracket$.
+
+  \begin{equation*}
+    \begin{split}
+      n+1 & = \displaystyle\sum_{i=0}^k a_i*i! +1 \\
+       & = \displaystyle\sum_{i=i^*+1}^k a_i*i! + a_{i^*}*i^*! + \displaystyle\sum_{i=0}^{i^*-1} (i*i!) +1 \\
+       & = \displaystyle\sum_{i=i^*+1}^k a_i*i! + a_{i^*}*i^*! + i^*!  \hspace{1cm} \text{Because of the property 1} \\
+       & = \displaystyle\sum_{i=i^*+1}^k a_i*i! + (a_{i^*}+1)*i^*! \\
+       & = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*i!
+    \end{split}
+  \end{equation*}
+
+  Where $k^\prime = k$ and $a_i^\prime=\left\{
+                \begin{array}{ll}
+                  0 $, $\forall i < i^*\\
+                  a_i $, $\forall i > i^*\\
+                  a_i +1 $, if $i=i^*
+                \end{array}
+              \right.$ \\
+
+  Let us now consider the second case where $i^* = k+1$, which is a special case. Here $\forall i \in \llbracket 0, k\rrbracket$, $a_i = i$.
+
+  \begin{equation*}
+    \begin{split}
+      n+1 & = \displaystyle\sum_{i=0}^k i*i! +1 \\
+       & = (k+1)! \hspace{1cm} \text{Because of the property 1} \\
+       & = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*i!
+    \end{split}
+  \end{equation*}
+
+  Where $k^\prime = k+1$ and $a_i^\prime=\left\{
+                \begin{array}{ll}
+                  0 $, $\forall i < i^*\\
+                  1 $, if $i=i^*
+                \end{array}
+              \right.$ \\
+
+  In both cases, $n+1$ can be expressed in factorial representation. \\
+
+  To conclude, we have seen that the property is true when $n=0$, we have proven that $P_n$ implies that $P_{n+1}$ is true. Thus the property stands $\forall n \geq  0$.
+
+\end{proof}
+
+\paragraph{1.2) Prove that this expression is unique (there is not two ways to express a natural number in factorial representation).}
+
+\begin{proof}
+
+Let us suppose there exists $n$, a natural number such that $n = \displaystyle\sum_{i=0}^k a_i*i!$ and $n = \displaystyle\sum_{i=0}^{k^\prime} b_i*i!$ where there is at least a $i$ such that $a_i \ne b_i$. \\
+
+Without loss of generality, we can write that $k^\prime = k$ (because in the case of $k^\prime > k$ we can say that all the $a_i=0$, $ \forall i \in \llbracket k+1, k^\prime\rrbracket$). \\
+
+Let $l=max(i \in \llbracket 0, k\rrbracket \mid a_i \ne b_i)$, $A=(a_0, a_1, \dots , a_{l-1})$ and $B=(b_0, b_1, \dots , b_{l-1})$. We define $\phi_{A, l}$ as follows : $\phi_{A, l} = \dfrac{1}{l!}\displaystyle\sum_{i=0}^{l-1} a_i*i!$\\
+
+Hence we have that :
+
+\begin{alignat*}{3}
+  \displaystyle\sum_{i=0}^k a_i*i! &= \displaystyle\sum_{i=0}^{k} b_i*i! & &\Rightarrow {} & a_l*l! + \displaystyle\sum_{i=0}^{l-1} a_i*i! &= b_l*l! + \displaystyle\sum_{i=0}^{l-1} b_i*i! \\
+  & & &\Rightarrow  & a_l + (\dfrac{1}{l!}\displaystyle\sum_{i=0}^{l-1} a_i*i!) &= b_l + (\dfrac{1}{l!}\displaystyle\sum_{i=0}^{l-1} b_i*i!) \\
+  & & &\Rightarrow  & a_l + \phi_{A, l} &= b_l + \phi_{B, l} \\
+  & & &\Rightarrow  & (a_l-b_l) &= (\phi_{B, l}-\phi_{A, l})
+\end{alignat*}
+
+By definition of $a_l$ and $b_l$, we know that $(a_l-b_l) \in \mathbb{Z}\backslash \{0\}$. Moreover, by definition, we know that $\forall i \in \llbracket 0, l-1\rrbracket$, $a_i \leq i$ and $b_i \leq i$. Thus :\\
+
+Thus $0 \leq \phi_{A, l} \leq \dfrac{1}{l!}\displaystyle\sum_{i=0}^{l-1} i*i! \leq \dfrac{1}{l!}(\displaystyle\sum_{i=0}^{l-1} (i*i!) +1 -1) = \dfrac{l!-1}{l!} = 1-\dfrac{1}{l!} < 1$. Then $-1 > -\phi_{A, l} \geq 0$. We can deduce the same results for $\phi_{B, l}$, and especially $0 \leq \phi_{B, l} < 1$. Given those two results, we have that :
+
+\begin{equation*}
+  -1 < \phi_{B, l}-\phi_{A, l} < 1
+\end{equation*}
+
+This result is absurd since we have that $(a_l-b_l) = (\phi_{B, l}-\phi_{A, l})$ and that $(a_l-b_l) \in \mathbb{Z}\backslash \{0\}$. \\
+
+Hence we showed that supposing there exists a natural number that can be expressed in two different ways in factorial representation implies a absurd result. Therefore the factorial representation a all natural numbers is different.
+
+\end{proof}
+
+\section*{Exercice 3}
+
+\paragraph{1.1) Prove that all natural number can be expressed in Fibonacci representation.}
+
+\begin{prop}
+  $P_n : $ The natural number $n$ can be written using Fibonacci representation. This means that $\exists k \in \mathbb{N}$ and $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, 1\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*f_{i+2}$ and $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$. The Fibonacci representation of $n$ is represented by $a_k...a_1a_0$ where $k$ is the smallest natural number that satisfies the previous result.
+\end{prop}
+
+The very first thing we have to consider is that the Fibonacci number associated to $a_i$ is $f_{i+2}$, not $f_i$. The other important thing, is the constraint $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$. This implies that we can not have two consecutive $a_i$ equal to one. Now that we have a better understanding of $P_n$, we are going to prove it.\\
+
+\begin{proof}
+  Case $n=0$ : $0 = 0 * 1 = \displaystyle\sum_{i=0}^k a_i*f_{i+2}$ where $k=0$ and $a_0 = 0$. \\
+
+  Let us suppose $P_n$ is true. We want to prove that $P_{n+1}$ is true. As this is our induction hypothesis, we know that $\exists k \in \mathbb{N}$ and $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, 1\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*f_{i+2}$ and $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$. For convenience, let us take the smallest $k$ such that $\forall i \in \llbracket 0, k\rrbracket$, $ \exists a_i \in \llbracket 0, 1\rrbracket$ such that $n = \displaystyle\sum_{i=0}^k a_i*f_{i+2}$ and $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$. This way we do not work with useless zeros. We have $a_k = 1$ in all cases except if $n=0$.\\
+
+  Let $i^*=min(i \in \llbracket 0, k+1\rrbracket \mid a_i + a_{i+1} = 0)$. By this definition, we have that $a_{i^*}=0$ and $a_{i^*+1}=0$.\\
+
+  Here is a property we want to prove :
+
+  \begin{itemize}
+    \item If $i^* = 0$, then $n+1 = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*f_{i+2}$ where $k^\prime = k = 0$ and $a_0^\prime=1$.
+    \item If $0< i^* \leq k$, then $n+1 = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*f_{i+2}$ where $k^\prime = k$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    a_i $, $\forall i > i^*\\
+                    1 $, if $i=i^*
+                  \end{array}
+                \right.$
+    \item If $i^* = k+1$, then $n+1 = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*f_{i+2}$ where $k^\prime = k+1$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    1 $, if $i=i^*
+                  \end{array}
+                \right.$
+    \end{itemize}
+
+    Moreover the property states that in all cases $\forall i \in \llbracket 0, k^\prime-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$.\\
+
+    Proving the previous property implies that $n+1$ can be written in Fibonacci representation. So let us prove it now : \\
+
+    The case $i^* = 0$ is trivial. This implies that $n=0$, thus $n+1= 1*1 = 1*f_2$. We obviously have $\forall i \in \llbracket 0, k^\prime-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$.\\
+
+    In the case $0 < i^* \leq k$, we can say that
+    $\left\{\begin{array}{ll}
+        \forall i \in \llbracket 0, i^*-1\rrbracket$, $a_ia_{i+1} = 0\\
+        \forall i \in \llbracket 0, i^*-1\rrbracket$, $a_i + a_{i+1} \ne 0\\
+        a_{i^*-1} = 1
+      \end{array}\right.$ We can notice that $i^*$ is necessarily different from $k$ or $k-1$.\\
+
+    In this case, $n$ can be written in this way $n = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \displaystyle\sum_{i=0}^{i^*-1} a_i*f_{i+2}$.
+    Here we can divide the problem in two parts : $i^*-1$ is even and $i^*-1$ is odd. \\
+
+    If $i^*-1$ is even, $\forall i \in \mathbb{N}$ such that $2i \leq i^*-1$, $a_{2i} = 1$ y $a_{2i-1} = 0$. Thus $n = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \displaystyle\sum_{i=0}^{(i^*-1)/2} f_{2i+2}$. As $f_1 = 1$,
+    and by the property of the Fibonacci sequence $f_{n+2} = f_{n+1} + f_n$, we can show that :
+
+    \begin{equation*}
+      \begin{split}
+        n+1 & = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \displaystyle\sum_{i=0}^{(i^*-1)/2} f_{2i+2} + 1 \\
+         & = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \underbrace{\displaystyle\sum_{i=0}^{(i^*-1)/2} f_{2i+2} + f_1}_{= f_{i^*+2}} \hspace{1cm} \text{Property of the Fibonacci sequence} \\
+         & = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*f_{i+2}
+      \end{split}
+    \end{equation*}
+
+    If $i^*-1$ is odd, $\forall i \in \mathbb{N}$ such that $2i+1 \leq i^*-1$, $a_{2i} = 0$ y $a_{2i+1} = 1$. Thus $n = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \displaystyle\sum_{i=0}^{(i^*-2)/2} f_{2i+3}$. As $f_2 = 1$,
+    and by the property of the Fibonacci sequence $f_{n+2} = f_{n+1} + f_n$, we can show that :
+
+    \begin{equation*}
+      \begin{split}
+        n+1 & = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \displaystyle\sum_{i=0}^{(i^*-2)/2} f_{2i+3} + 1 \\
+         & = \displaystyle\sum_{i=i^*+2}^k a_i*f_{i+2} + \underbrace{\displaystyle\sum_{i=0}^{(i^*-2)/2} f_{2i+3} + f_2}_{= f_{i^*+2}} \hspace{1cm} \text{Property of the Fibonacci sequence} \\
+         & = \displaystyle\sum_{i=0}^{k^\prime} a_i^\prime*f_{i+2}
+      \end{split}
+    \end{equation*}
+
+    In both cases ($i^*-1$ even and odd), $k^\prime = k$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    a_i $, $\forall i > i^*\\
+                    1 $, if $i=i^*
+                  \end{array}
+                \right.$ \\
+
+    In both cases $\forall i > i^* $, $a_i^\prime=a_i$ so as we have that $\forall i \in \llbracket i^*+1, k-1\rrbracket$, $a_ia_{i+1} = 0$ we have that $\forall i \in \llbracket i^*+1, k^\prime-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$. Moreover, $\forall i < i^* $, $a_i^\prime=0$ so $\forall i \in \llbracket 0, i^*-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$. Finally, we know that $a_{i^*}^\prime a_{i^*+1}^\prime = 0$ because $a_{i^*+1}^\prime = a_{i^*+1} = 0$ by definition of $i^*$. So $\forall i \in \llbracket 0, k^\prime-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$\\
+
+    If $i^* = k+1$, then if $k$ is even $n+1 = \displaystyle\sum_{i=0}^{k/2} f_{2i+2} +1 = \displaystyle\sum_{i=0}^{k/2} f_{2i+2} + f_1 = f_{k+3}$. If $k$ is odd $n+1 = \displaystyle\sum_{i=0}^{(k-1)/2} f_{2i+3} +1 = \displaystyle\sum_{i=0}^{(k-1)/2} f_{2i+3} + f_2 = f_{k+3}$. \\
+
+    So in both cases ($k$ even and odd), $n+1 = \displaystyle\sum_{i=0}^{k^\prime} f_{i+2}$ where $k^\prime = k+1$ and $a_i^\prime=\left\{
+                  \begin{array}{ll}
+                    0 $, $\forall i < i^*\\
+                    1 $, if $i=i^*
+                  \end{array}
+                \right.$
+
+    Then obviously, as only $a_{i^*} = 0$, $\forall i \in \llbracket 0, k^\prime-1\rrbracket$, $a_i^\prime a_{i+1}^\prime = 0$. \\
+
+    To conclude, we have seen that the property is true when $n=0$, we have proven that $P_n$ implies that $P_{n+1}$ is true. Thus the property stands $\forall n \geq  0$.
+
+\end{proof}
+
+\paragraph{1.2) Prove that this expression is unique (there is not two ways to express a natural number in Fibonacci representation).}
+
+In order to proove this, we are going to use the same idea or method from the previous part.
+
+\begin{proof}
+  Let us suppose there exists a natural number $n$ such that $n = \displaystyle\sum_{i=0}^k a_if_{i+2} = \displaystyle\sum_{i=0}^{k^\prime} b_if_{i+2}$ (like the previous exercice we can assume without loss of generality that $k^\prime = k$) where $\forall i \in \llbracket 0, k\rrbracket$, $a_i \in \llbracket 0, 1\rrbracket$ and $b_i \in \llbracket 0, 1\rrbracket$, where there exists at least a $i \in \llbracket 0, k-1\rrbracket$ such that $a_i \ne b_i$. We have that $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$ and $\forall i \in \llbracket 0, k-1\rrbracket$, $b_ib_{i+1} = 0$. \\
+
+  Let $l=max(i \in \llbracket 0, k\rrbracket \mid a_i \ne b_i)$. We know that $|a_l-b_l| = 1$. Let $A=(a_0, a_1, \dots , a_{l-1})$ and $B=(b_0, b_1, \dots , b_{l-1})$. We define $\beta_{A, l}$ as follows : $\beta_{A, l} = \dfrac{1}{f_{l+2}}\displaystyle\sum_{i=0}^{l-1} a_if_{i+2}$.\\
+
+  \begin{alignat*}{3}
+    \displaystyle\sum_{i=0}^k a_if_{i+2} &= \displaystyle\sum_{i=0}^{l-1} b_if_{i+2} & &\Rightarrow {} & a_lf_{l+2} + \displaystyle\sum_{i=0}^k a_if_{i+2} &= b_lf_{l+2} + \displaystyle\sum_{i=0}^{l-1} b_if_{i+2} \\
+    & & &\Rightarrow  & a_l + (\dfrac{1}{f_{l+2}}\displaystyle\sum_{i=0}^{l-1} a_if_{i+2}) &= b_l + (\dfrac{1}{f_{l+2}}\displaystyle\sum_{i=0}^{l-1} b_if_{i+2}) \\
+    & & &\Rightarrow  & a_l + \beta_{A, l} &= b_l + \beta_{B, l} \\
+    & & &\Rightarrow  & (a_l-b_l) &= (\beta_{B, l}-\beta_{A, l})
+  \end{alignat*}
+
+ Because of the constraint that $\forall i \in \llbracket 0, k-1\rrbracket$, $a_ia_{i+1} = 0$, if $l-1$ is even :
+
+ $$0 \leq \beta_{A, l} = \dfrac{1}{f_{l+2}}(\displaystyle\sum_{i=0}^{l-1} a_if_{i+2}) = \dfrac{1}{f_{l+2}}(f_{l+1} + f_{l-1} + \dots + f_4 + f_2 + f_1 -1) = \dfrac{1}{f_{l+2}}(f_{l+2} -1) = 1-\dfrac{1}{f_{l+2}} < 1$$
+
+ If $l-1$ is odd, we obtain the same result :
+
+ $$0 \leq \beta_{A, l} = \dfrac{1}{f_{l+2}}(\displaystyle\sum_{i=0}^{l-1} a_if_{i+2}) = \dfrac{1}{f_{l+2}}(f_{l+1} + f_{l-1} + \dots + f_5 + f_3 + f_2 -1) = \dfrac{1}{f_{l+2}}(f_{l+2} -1) = 1-\dfrac{1}{f_{l+2}} < 1$$
+
+ Then $-1 > -\beta_{A, l} \geq 0$. We can deduce the same results for $\beta_{B, l}$, and especially $0 \leq \beta_{B, l} < 1$. Given those two results, we have that :
+
+\begin{equation*}
+  -1 < \beta_{B, l}-\beta_{A, l} < 1
+\end{equation*}
+
+Finally, we have that $1 = |a_l-b_l| = \beta_{B, l}-\beta_{A, l} < 1$ which is absurd. Thus the Fibonacci representation is unique for all $n \in \mathbb{N}$.
+
+\end{proof}
+
+\appendix
+\bibliographystyle{ieeetr}
+\bibliography{demonstrations}
+
+\end{document}
