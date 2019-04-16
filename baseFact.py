@@ -57,8 +57,8 @@ def baseFact(n):
 
 if __name__ == "__main__":
     # get the argument needed
-    args = argumentManager()
+    n = argumentManager()
 
     # compute the factorial representation of n and display it
-    fact_repr = baseFact(args.n)
+    fact_repr = baseFact(n)
     displayHash(fact_repr)

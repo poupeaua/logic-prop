@@ -50,8 +50,8 @@ def baseFib(n):
 
 if __name__ == "__main__":
     # get the arguments needed
-    args = argumentManager()
+    n = argumentManager()
 
     # compute the Fibonnaci representation of n
-    fib_repr = baseFib(args.n)
+    fib_repr = baseFib(n)
     displayHash(fib_repr)

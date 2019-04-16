@@ -18,9 +18,39 @@
 
 \section*{Exercice 1}
 
-\paragraph{1)}
+For the rest of the exercice 1, we assume that : \\
 
-\cite{author1}
+$ p\in CNF \iff \exists k \in \mathbb{N}$ and $\forall i \in \llbracket 1, k\rrbracket,  \exists J_i \in \mathbb{N}$ such that $p = \displaystyle\bigwedge_{1 \leq i \leq k} C_i = \displaystyle\bigwedge_{1 \leq i \leq k} (\displaystyle\bigvee_{1 \leq j  \leq J_i} l_{i,j})$ where $l_{i,j}$ is a literal. $C_i$ is the representation we will used to describe "clausulas".
+
+\paragraph{1.1) Prove that all logical propositional formulas puden escribirse en $CNF$.}
+
+In order to demonstrate this we will prove two properties first.
+
+\begin{prop}
+  \label{prop1.1}
+  $P_n :$ If $(\Phi,\Omega)\in CNF$ and are especially of the following form : $\Phi = \displaystyle\bigwedge_{1 \leq i \leq k} C_i$ and $\Omega = \displaystyle\bigwedge_{1 \leq i \leq k^{\prime}} C^{\prime}_i$ with $k,k^{\prime} \leq n  \implies (\Phi \bigvee \Omega)\in CNF$
+\end{prop}
+
+\begin{proof}
+
+  Case $n = 1$ :
+  \begin{equation*}
+    \begin{split}
+      \Phi \displaystyle\bigvee \Omega & = \displaystyle\bigvee_{1 \leq j  \leq J^{\Phi}_1} l^{\Phi}_{1,j} \vee \displaystyle\bigvee_{1 \leq j  \leq J^{\Omega}_1} l^{\Omega}_{1,j}\\
+       & = \displaystyle\bigwedge_{1 \leq i \leq k} (\displaystyle\bigvee_{1 \leq j  \leq J^{\prime}_i} l^{\prime}_{i,j}) \\
+    \end{split}
+  \end{equation*}
+
+  Where $k=1$, $J^{\prime}_1 = J^{\Phi}_1 + J^{\Omega}_1$ and $l^{\prime}=\left\{
+                \begin{array}{ll}
+                  l^{\Phi}_{1,j}$ , $\forall j \in \llbracket 1, J^{\Phi}_1\rrbracket\\
+                  l^{\Omega}_{1,j}$, $\forall j \in \llbracket J^{\Phi}_1 J^{\Phi}_1+J^{\Omega}_1\rrbracket
+                \end{array}
+              \right.$
+
+\end{proof}
+
+\nocite{*}
 
 \section*{Exercice 2}
 
