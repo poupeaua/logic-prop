@@ -5,7 +5,30 @@
     representation.
 """
 
-from tools import *
+import numpy as np
+
+
+def checkIntPositive(n):
+    """ Ensures that the input n is a positive integer. """
+    if int(n) != n:
+        raise TypeError("%s is an invalid positive int value" % n)
+    elif n < 0:
+        raise ValueError("%s is an invalid positive int value" % n)
+    return n
+
+
+def argumentManager():
+    """ Manager to get the n input. """
+    return checkIntPositive(float(input()))
+
+
+def displayHash(vect_repr):
+    """ Prints the number in hash format.
+
+    Argument:
+        vect_repr (numpy array): Representation of the number in a certain base.
+    """
+    print("#".join([str(num) for num in vect_repr]))
 
 
 def baseFact(n):
@@ -51,7 +74,7 @@ def baseFact(n):
         fact_repr[k] = a_k
         num_iter += 1
 
-    return fact_repr
+    return fact_repr[::-1]
 
 
 
